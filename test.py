@@ -1,0 +1,35 @@
+import unittest
+import datetime
+from TarjetaCodigo import TarjetaCodigo
+
+class TestTarjetaCodigo(unittest.TestCase):
+    def test_numeroTarjeta(self):
+        # Casos de prueba para numeroTarjeta
+        self.assertTrue(TarjetaCodigo.numeroTarjeta("1234567890123456"))  # Número válido
+        self.assertFalse(TarjetaCodigo.numeroTarjeta("1234"))  # Número con longitud incorrecta
+        self.assertFalse(TarjetaCodigo.numeroTarjeta("123456789012345a"))  # Número con caracteres no numéricos
+        self.assertTrue(TarjetaCodigo.numeroTarjeta("9876543210987654"))  # Otro número válido
+
+    def test_fechaTarjeta(self):
+        # Casos de prueba para fechaTarjeta
+        self.assertTrue(TarjetaCodigo.fechaTarjeta("12/25"))  # Fecha válida
+        self.assertFalse(TarjetaCodigo.fechaTarjeta("13/25"))  # Mes fuera de rango
+        self.assertFalse(TarjetaCodigo.fechaTarjeta("12/20"))  # Fecha anterior a 2023
+        self.assertTrue(TarjetaCodigo.fechaTarjeta("05/24"))  # Otra fecha válida
+
+    def test_codigoTarjeta(self):
+        # Casos de prueba para codigoTarjeta
+        self.assertTrue(TarjetaCodigo.codigoTarjeta("123"))  # Código válido
+        self.assertFalse(TarjetaCodigo.codigoTarjeta("12"))  # Código con longitud incorrecta
+        self.assertFalse(TarjetaCodigo.codigoTarjeta("12a"))  # Código con caracteres no numéricos
+        self.assertTrue(TarjetaCodigo.codigoTarjeta("999"))  # Otro código válido
+
+    def test_verificarSaldo(self):
+        # Casos de prueba para verificarSaldo
+        self.assertTrue(TarjetaCodigo.verificarSaldo("100", "500"))  # Saldo suficiente
+        self.assertFalse(TarjetaCodigo.verificarSaldo("600", "500"))  # Valor a pagar mayor que saldo
+        self.assertFalse(TarjetaCodigo.verificarSaldo("abc", "500"))  # Valor a pagar no numérico
+        self.assertFalse(TarjetaCodigo.verificarSaldo("100", "abc"))  # Saldo no numérico
+
+if __name__ == '__main__':
+    unittest.main()
