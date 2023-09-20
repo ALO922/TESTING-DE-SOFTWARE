@@ -6,23 +6,20 @@
 import datetime
 
 class TarjetaCodigo(object):
-    #Inicializa la tarjeta
-    def _init_(self):
+    # Inicializa la tarjeta
+    def __init__(self):
         pass
 
-    #Este hace que las def sean métodos estáticos de la clase principal.
-    @staticmethod
-    #Función para verificar el número de la tarjeta
-    def numeroTarjeta(numTarjeta):
+    # Función para verificar el número de la tarjeta
+    def numeroTarjeta(self, numTarjeta):
         if not numTarjeta.isdigit():
             return False
         if len(numTarjeta) != 16:
             return False
         return True
-    #Este hace que las def sean métodos estáticos de la clase principal.
-    @staticmethod
-    #Función para verificar la fecha de vencimiento
-    def fechaTarjeta(fecha):
+
+    # Función para verificar la fecha de vencimiento
+    def fechaTarjeta(self, fecha):
         try:
             mes, año = fecha.split('/')
             mes = int(mes)
@@ -35,20 +32,17 @@ class TarjetaCodigo(object):
         except:
             return False
         return True
-    #Este hace que las def sean métodos estáticos de la clase principal.
-    @staticmethod
-    #Función para verificar el código de la tarjeta
-    def codigoTarjeta(cod):
+
+    # Función para verificar el código de la tarjeta
+    def codigoTarjeta(self, cod):
         if not cod.isdigit():
             return False
         if len(cod) != 3:
             return False
         return True
-    
-    #Este hace que las def sean métodos estáticos de la clase principal.
-    @staticmethod
-    #Función para verificar el saldo mayor que el valor a pagar
-    def verificarSaldo(valorPagar,saldo):
+
+    # Función para verificar el saldo mayor que el valor a pagar
+    def verificarSaldo(self, valorPagar, saldo):
         if not valorPagar.isdigit():
             return False
         if not saldo.isdigit():
@@ -57,17 +51,20 @@ class TarjetaCodigo(object):
             return False
         return True
 
-#Verifica si la tarjeta es válida
+# Verifica si la tarjeta es válida
 def verificarTarjeta(numTarjeta, fecha, cod, valorPagar, saldo):
     tarjeta_valida = False
 
-    if TarjetaCodigo.numeroTarjeta(numTarjeta) and TarjetaCodigo.fechaTarjeta(fecha) and TarjetaCodigo.codigoTarjeta(cod) and TarjetaCodigo.verificarSaldo(valorPagar,saldo):
+    tarjeta = TarjetaCodigo()
+
+    if tarjeta.numeroTarjeta(numTarjeta) and tarjeta.fechaTarjeta(fecha) and tarjeta.codigoTarjeta(cod) and tarjeta.verificarSaldo(valorPagar, saldo):
         tarjeta_valida = True
 
     if tarjeta_valida:
         print("La tarjeta de crédito es válida, pago aceptado.")
     else:
         print("La tarjeta de crédito no es válida, pago rechazado.")
+
 
 # numTarjeta = input("Ingrese su número de tarjeta de crédito: ")
 # fecha = input("Ingrese la fecha de expiración con formato (MM/YY) de su tarjeta de crédito: ")
